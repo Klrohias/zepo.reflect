@@ -5,5 +5,12 @@
         "name": "klrohias",
         "url": "https://github.com/klrohias"
     },
-    "zepofile": "zepofile.js"
+    "zepofile": "zepofile.js",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Klrohias/zepo.reflect"
+    }
 }
