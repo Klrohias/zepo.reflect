@@ -1,0 +1,9 @@
+{
+    "name": "zepo.reflect",
+    "version": "0.1.0",
+    "author": {
+        "name": "klrohias",
+        "url": "https://github.com/klrohias"
+    },
+    "zepofile": "zepofile.js"
+}
