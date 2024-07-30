@@ -10,6 +10,8 @@
 #include <stdexcept>
 #include <string>
 #include <typeindex>
+#include <string_view>
+#include <vector>
 
 namespace zepo {
     inline void checkTypeMatch(const std::type_index& fieldType, std::string_view fieldName,
@@ -142,7 +144,7 @@ namespace zepo {
     struct ReflectTraits : Handler {
         using Handler::Handler;
 
-        void handle() {
+        void execute() {
             throw std::runtime_error("Unknown type: " + std::string(typeid(Type).name()));
         }
     };
@@ -157,7 +159,7 @@ namespace zepo {
 #define ZEPO_REFLECT_METADATA_(TYPE_) template<> \
 zepo::TypeMetadata<TYPE_> zepo::metadataOf<TYPE_> = []() { \
     static zepo::ReflectTraits<TYPE_, zepo::MetadataHandler<TYPE_>> metadataHandler{}; \
-    metadataHandler.handle(); \
+    metadataHandler.execute(); \
     return metadataHandler.metadata; \
 }();
 
@@ -165,7 +167,7 @@ zepo::TypeMetadata<TYPE_> zepo::metadataOf<TYPE_> = []() { \
     struct zepo::ReflectTraits<TYPE_, Handler> : Handler { \
         using CurrentType = TYPE_; \
         using Handler::Handler; \
-        void handle() {
+        void execute() {
 
 #define ZEPO_REFLECT_ATTRIBUTE_(ATTRIBUTE_) this->template attribute<[] { \
     static auto currentAttribute{ATTRIBUTE_}; \
